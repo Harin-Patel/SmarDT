@@ -1,0 +1,25 @@
+image: node:18
+
+stages:
+  - build
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build
+    - mv out public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
+deploy_render:
+  stage: deploy
+  script:
+    - curl -X POST "$RENDER_DEPLOY_HOOK"
+  only:
+    - main
+    - development

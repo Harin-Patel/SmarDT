@@ -1,0 +1,202 @@
+/* ============================================
+   Tailwind CSS Import
+   ============================================ */
+@import "tailwindcss";
+
+/* ============================================
+   Design Tokens (CSS Variables)
+   ============================================ */
+:root {
+  /* Semantic Tokens */
+  --background: #ffffff;
+  --foreground: #111827;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #066EB6;
+  
+  /* Card */
+  --card: #ffffff;
+  --card-foreground: #111827;
+  
+  /* Brand Colors */
+  --primary: #066EB6;
+  --primary-foreground: #ffffff;
+  --secondary: #6BC06A;
+  --secondary-foreground: #ffffff;
+  
+  /* Accent */
+  --accent: #f3f4f6;
+  --accent-foreground: #111827;
+  
+  /* Status Colors */
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --success: #22c55e;
+  --success-foreground: #ffffff;
+  --warning: #f59e0b;
+  --warning-foreground: #ffffff;
+  
+  /* Typography */
+  --font-barlow: 'Barlow', system-ui, -apple-system, sans-serif;
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ============================================
+   Tailwind v4 Theme (Source of Truth)
+   ============================================ */
+@theme inline {
+  /* === Semantic Colors === */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  /* === Primary Scale === */
+  --color-primary-25: #f5fafd;
+  --color-primary-50: #e6f4fb;
+  --color-primary-100: #cce9f7;
+  --color-primary-150: #DBEAFE;
+  --color-primary-200: #99d3ef;
+  --color-primary-300: #66bde7;
+  --color-primary-400: #33a7df;
+  --color-primary-500: #066EB6;
+  --color-primary-600: #055892;
+  --color-primary-700: #04426d;
+  --color-primary-800: #032c49;
+  --color-primary-900: #011624;
+  
+  /* === Secondary Scale === */
+  --color-secondary-50: #f0faf0;
+  --color-secondary-100: #e1f5e1;
+  --color-secondary-200: #c3ebc3;
+  --color-secondary-300: #a5e1a5;
+  --color-secondary-400: #87d787;
+  --color-secondary-500: #6BC06A;
+  --color-secondary-600: #559a55;
+  --color-secondary-700: #407340;
+  --color-secondary-800: #2a4d2a;
+  --color-secondary-900: #152615;
+  
+  /* === Neutral Scale === */
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #77787B;
+  --color-neutral-600: #4b5563;
+  --color-neutral-650: #C7C8CA;
+  --color-neutral-700: #374151;
+  --color-neutral-750: #1F2A37;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+  --color-neutral-950: #231F20;
+  
+  /* === Success Scale === */
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+  --color-success-900: #14532d;
+  
+  /* === Warning Scale === */
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+  
+  /* === Error Scale === */
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-200: #fecaca;
+  --color-error-300: #fca5a5;
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+  --color-error-800: #991b1b;
+  --color-error-900: #7f1d1d;
+  
+  /* === Legacy Aliases (Backward Compatibility) === */
+  /* @deprecated Use primary-150 instead */
+  --color-blue-light: #DBEAFE;
+  
+  /* === White === */
+  --color-white: #ffffff;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-barlow), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* ============================================
+   Link Styles
+   ============================================ */
+footer a {
+  color: inherit;
+}
+
+footer a:hover {
+  color: inherit;
+}
+
+/* ============================================
+   Scrollbar Styles
+   ============================================ */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-neutral-400);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--muted-foreground);
+}
+
+/* ============================================
+   Focus Visible Styles
+   ============================================ */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
