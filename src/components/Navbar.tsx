@@ -107,16 +107,16 @@ const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
   );
 
   // LinkedIn Icon SVG
+  // LinkedIn Icon SVG
   const LinkedInIcon = () => (
     <svg
       width="20"
       height="20"
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill="#0073B1"
       xmlns="http://www.w3.org/2000/svg"
-      className="text-primary-500"
     >
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+      <path d="M5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM20.452 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286z" />
     </svg>
   );
 
@@ -137,6 +137,19 @@ const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+    </svg>
+  );
+
+  const FilledArrowDown = ({ className = "" }: { className?: string }) => (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path d="M6 8.5L2 4.5H10L6 8.5Z" fill="currentColor" />
     </svg>
   );
 
@@ -167,179 +180,256 @@ const Navbar: React.FC<NavbarProps> = ({ className = "" }) => {
   };
 
   return (
-    <nav className={`w-full fixed top-0 left-0 z-50 ${className}`}>
-      {/* Top Navigation Bar - Hidden on mobile */}
-      <div className="hidden lg:block bg-white border-b border-neutral-200">
-        <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-8 sm:h-9">
-            {/* Left side - Top nav links */}
-            <div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
-              {topNavItems.map((item, index) => (
-                <div key={index} className="relative" ref={(el) => { dropdownRefs.current[`top-${index}`] = el; }}>
-                  {item.dropdown ? (
-                    <button
-                      onClick={() => toggleDropdown(`top-${index}`)}
-                      style={{ color: '#77787B', lineHeight: '17px', gap: '4px' }}
-                      className="flex items-center text-xs sm:text-sm font-medium tracking-normal hover:text-neutral-900 transition-colors"
-                    >
-                      <span>{item.label}</span>
-                      <ChevronDownIcon className="text-[#9CA3AF]" />
-                    </button>
-                  ) : (
-                    <a href={item.href || "#"} style={{ color: '#77787B', lineHeight: '17px' }} className="text-xs sm:text-sm font-medium tracking-normal hover:text-neutral-900 transition-colors">
-                      {item.label}
-                    </a>
-                  )}
-                  {item.dropdown && (
-                    <Dropdown
-                      items={item.dropdown}
-                      isOpen={activeDropdown === `top-${index}`}
-                      onClose={() => setActiveDropdown(null)}
-                    />
-                  )}
+    <nav className={`absolute top-0 left-0 z-50 flex flex-col items-center w-full ${className}`}>
+      {/* Top Navigation Bar */}
+      <div className="hidden lg:flex justify-center items-center bg-white w-full" style={{ height: '36px' }}>
+        <div className="flex flex-row justify-between items-center px-4 lg:px-[80px] w-full max-w-[1440px]" style={{ height: '100%' }}>
+
+          {/* Left side - Top nav links */}
+          <div className="flex flex-row items-center" style={{ gap: '30px' }}>
+            {topNavItems.map((item, index) => (
+              <div key={index} className="relative" ref={(el) => { dropdownRefs.current[`top-${index}`] = el; }}>
+                {item.dropdown ? (
+                  <button
+                    onClick={() => toggleDropdown(`top-${index}`)}
+                    className="flex items-center hover:text-neutral-900 transition-colors"
+                    style={{
+                      fontFamily: 'var(--font-barlow)',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                      lineHeight: '17px',
+                      color: '#77787B',
+                      gap: '4px'
+                    }}
+                  >
+                    <span>{item.label}</span>
+                    <ChevronDownIcon className="text-[#77787B]" />
+                  </button>
+                ) : (
+                  <a
+                    href={item.href || "#"}
+                    className="hover:text-neutral-900 transition-colors"
+                    style={{
+                      fontFamily: 'var(--font-barlow)',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                      lineHeight: '17px',
+                      color: '#77787B'
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                )}
+                {item.dropdown && (
+                  <Dropdown
+                    items={item.dropdown}
+                    isOpen={activeDropdown === `top-${index}`}
+                    onClose={() => setActiveDropdown(null)}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Right side - Phone, Language, LinkedIn */}
+          <div className="flex items-center justify-between" style={{ width: '210px', height: '36px' }}>
+            {/* Phone */}
+            <a
+              href="tel:+15183245741"
+              className="flex items-center hover:text-neutral-900 transition-colors"
+              style={{ gap: '8px' }}
+            >
+              <img src="/phoneicon.svg" alt="Phone" width="14" height="14" />
+              <span style={{
+                fontFamily: 'var(--font-barlow)',
+                fontWeight: 500,
+                fontSize: '12px',
+                lineHeight: '24px',
+                color: '#231F20'
+              }}>
+                +1 518 324 5741
+              </span>
+            </a>
+
+            {/* Language */}
+            <div className="relative" ref={(el) => { dropdownRefs.current["top-lang"] = el; }}>
+              <button
+                onClick={() => toggleDropdown("top-lang")}
+                className="flex items-center justify-center transition-colors relative"
+                style={{ width: '24px', height: '36px' }}
+              >
+                <span style={{
+                  fontFamily: 'var(--font-barlow)',
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  lineHeight: '22px',
+                  color: '#231F20'
+                }}>
+                  Eng
+                </span>
+                <div style={{ position: 'absolute', left: '30px', top: '13px', width: '12px', height: '12px' }}>
+                  <FilledArrowDown className="text-[#231F20]" />
                 </div>
-              ))}
+              </button>
+              <Dropdown
+                items={[{ label: "English", href: "#" }, { label: "Français", href: "#" }, { label: "Español", href: "#" }]}
+                isOpen={activeDropdown === "top-lang"}
+                onClose={() => setActiveDropdown(null)}
+              />
             </div>
 
-            {/* Right side - Phone, Language, LinkedIn */}
-            <div className="flex items-center gap-3 sm:gap-4 lg:gap-5">
-              <a
-                href="tel:+15183245741"
-                className="flex items-center text-neutral-950 hover:text-neutral-900 transition-colors"
-                style={{ gap: '8px' }}
-              >
-                <PhoneIcon />
-                <span className="hidden sm:inline text-xs font-medium tracking-normal" style={{ lineHeight: '24px' }}>+1 518 324 5741</span>
-              </a>
-              <div className="relative" ref={(el) => { dropdownRefs.current["top-lang"] = el; }}>
-                <button
-                  onClick={() => toggleDropdown("top-lang")}
-                  className="flex items-center h-9 py-3 transition-colors"
-                  style={{ gap: '4px' }}
-                >
-                  <span className="text-xs sm:text-sm font-medium tracking-normal text-neutral-950" style={{ lineHeight: '22px' }}>Eng</span>
-                  <ChevronDownIcon className="text-neutral-950" />
-                </button>
-                <Dropdown
-                  items={[{ label: "English", href: "#" }, { label: "Français", href: "#" }, { label: "Español", href: "#" }]}
-                  isOpen={activeDropdown === "top-lang"}
-                  onClose={() => setActiveDropdown(null)}
-                />
-              </div>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-80 transition-opacity"
-                aria-label="LinkedIn"
-              >
-                <LinkedInIcon />
-              </a>
-            </div>
+            {/* LinkedIn */}
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+              aria-label="LinkedIn"
+            >
+              <LinkedInIcon />
+            </a>
           </div>
         </div>
       </div>
 
       {/* Main Navigation Bar */}
-      <div className="bg-primary-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-16">
-            {/* Left - Logo */}
-            <div className="flex items-center flex-shrink-0">
-              <a href="/" className="flex items-center">
-                <img
-                  src="/Smardt_Logo-P300-U-1024x185 1.png"
-                  alt="Smardt Logo"
-                  className="h-5 sm:h-6 w-auto"
-                />
-              </a>
-            </div>
+      <div className="w-full flex justify-center items-center bg-[#066EB6] px-4 lg:px-[80px]" style={{ height: '72px' }}>
+        <div className="w-full max-w-[1440px] flex items-center justify-between h-full">
 
-            {/* Center - Main Navigation Links - Desktop */}
-            <nav className="hidden lg:flex items-center gap-6 xl:gap-8 absolute left-1/2 -translate-x-1/2">
-              {mainNavItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="relative"
-                  ref={(el) => { dropdownRefs.current[`main-${index}`] = el; }}
-                >
-                  {item.dropdown ? (
-                    <button
-                      onClick={() => toggleDropdown(`main-${index}`)}
-                      className="flex items-center gap-1 text-white hover:text-neutral-100 transition-colors text-sm whitespace-nowrap"
-                    >
-                      <span>{item.label}</span>
-                      <ChevronDownIcon className="text-white opacity-80" />
-                    </button>
-                  ) : (
-                    <a href={item.href || "#"} className="text-white hover:text-neutral-100 transition-colors text-sm whitespace-nowrap">
-                      {item.label}
-                    </a>
-                  )}
-                  {item.dropdown && (
-                    <Dropdown
-                      items={item.dropdown}
-                      isOpen={activeDropdown === `main-${index}`}
-                      onClose={() => setActiveDropdown(null)}
-                    />
-                  )}
-                </div>
-              ))}
-            </nav>
-
-            {/* Right - Language & Button */}
-            <div className="hidden lg:flex items-center gap-4 xl:gap-6 flex-shrink-0">
-              {/* Language selector */}
-              <div className="relative" ref={(el) => { dropdownRefs.current["main-lang"] = el; }}>
-                <button
-                  onClick={() => toggleDropdown("main-lang")}
-                  className="flex items-center gap-1 text-white hover:text-neutral-100 transition-colors text-sm"
-                >
-                  <span>Eng</span>
-                  <ChevronDownIcon className="text-white opacity-80" />
-                </button>
-                <Dropdown
-                  items={[
-                    { label: "English", href: "#" },
-                    { label: "Français", href: "#" },
-                    { label: "Español", href: "#" },
-                  ]}
-                  isOpen={activeDropdown === "main-lang"}
-                  onClose={() => setActiveDropdown(null)}
-                />
-              </div>
-
-              {/* Request a quote button */}
-              <a
-                href="#"
-                className="px-4 xl:px-6 py-2 border-2 border-white !text-white rounded-full hover:bg-white hover:!text-primary-500 transition-all font-medium text-sm whitespace-nowrap"
-              >
-                Request a quote
-              </a>
-            </div>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden text-white p-2"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              )}
-            </button>
+          {/* Logo */}
+          <div className="flex items-center flex-shrink-0">
+            <a href="/" className="flex items-center">
+              <img
+                src="/Smardt_Logo-P300-U-1024x185 1.png"
+                alt="Smardt Logo"
+                className="h-6 lg:h-6 w-auto"
+                style={{ width: 'auto', maxHeight: '24px' }}
+              />
+            </a>
           </div>
+
+          {/* Center - Main Navigation Links - Desktop */}
+          <div className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2" style={{ gap: '24px' }}>
+            {mainNavItems.map((item, index) => (
+              <div
+                key={index}
+                className="relative"
+                ref={(el) => { dropdownRefs.current[`main-${index}`] = el; }}
+              >
+                {item.dropdown ? (
+                  <button
+                    onClick={() => toggleDropdown(`main-${index}`)}
+                    className="flex items-center hover:text-neutral-100 transition-colors whitespace-nowrap"
+                    style={{ gap: '4px' }}
+                  >
+                    <span style={{
+                      fontFamily: 'var(--font-barlow)',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                      lineHeight: '22px',
+                      color: '#FFFFFF'
+                    }}>{item.label}</span>
+                    <ChevronDownIcon className="text-white opacity-80" />
+                  </button>
+                ) : (
+                  <a href={item.href || "#"} className="hover:text-neutral-100 transition-colors whitespace-nowrap"
+                    style={{
+                      fontFamily: 'var(--font-barlow)',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                      lineHeight: '22px',
+                      color: '#FFFFFF'
+                    }}
+                  >
+                    {item.label}
+                  </a>
+                )}
+                {item.dropdown && (
+                  <Dropdown
+                    items={item.dropdown}
+                    isOpen={activeDropdown === `main-${index}`}
+                    onClose={() => setActiveDropdown(null)}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Right - Language & Button */}
+          <div className="hidden lg:flex items-center flex-shrink-0" style={{ gap: '16px' }}>
+            {/* Language selector */}
+            <div className="relative" ref={(el) => { dropdownRefs.current["main-lang"] = el; }}>
+              <button
+                onClick={() => toggleDropdown("main-lang")}
+                className="flex items-center hover:text-neutral-100 transition-colors"
+                style={{ gap: '4px' }}
+              >
+                <span style={{
+                  fontFamily: 'var(--font-barlow)',
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  lineHeight: '22px',
+                  color: '#FFFFFF'
+                }}>
+                  Eng
+                </span>
+                <ChevronDownIcon className="text-white opacity-80" />
+              </button>
+              <Dropdown
+                items={[
+                  { label: "English", href: "#" },
+                  { label: "Français", href: "#" },
+                  { label: "Español", href: "#" },
+                ]}
+                isOpen={activeDropdown === "main-lang"}
+                onClose={() => setActiveDropdown(null)}
+              />
+            </div>
+
+            {/* Request a quote button */}
+            <a
+              href="#"
+              className="flex justify-center items-center hover:bg-white hover:!text-[#066EB6] transition-all whitespace-nowrap"
+              style={{
+                width: '157px',
+                height: '48px',
+                backgroundColor: '#066EB6',
+                border: '1px solid #FFFFFF',
+                borderRadius: '100px',
+                padding: '12px 16px',
+                gap: '10px',
+                fontFamily: 'var(--font-inter)',
+                fontWeight: 500,
+                fontSize: '16px',
+                lineHeight: '24px',
+                color: '#FFFFFF'
+              }}
+            >
+              Request a quote
+            </a>
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden text-white p-2 focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+          </button>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-primary-600 border-t border-primary-400">
+          <div className="lg:hidden absolute top-[72px] left-0 w-full bg-[#066EB6] border-t border-primary-400">
             <div className="px-4 py-4 space-y-3">
               {/* Top nav items in mobile */}
               {topNavItems.map((item, index) => (

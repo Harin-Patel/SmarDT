@@ -8,7 +8,7 @@ interface ChillerData {
   className: string;
   capacity: string;
   power: string;
-  category: string;
+  category: string; // The text for the badge
   image: string;
   features: string[];
   description: string;
@@ -20,50 +20,75 @@ interface ChillerCardProps {
 
 const ChillerCard: React.FC<ChillerCardProps> = ({ data }) => {
   return (
-    <div className="bg-white rounded-lg flex flex-col  w-full max-w-[628px] h-[714px] p-6">
-
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-lg font-semibold text-neutral-950">{data.className}</p>
-          <h5 className="text-2xl lg:text-[28px] font-semibold text-primary-500 leading-tight">
+    <div className="flex flex-col w-full h-full">
+      {/* HEADER */}
+      <div className="flex flex-row justify-between items-start mb-2">
+        {/* Left Side: Name, Capacity, Power */}
+        <div className="flex flex-col gap-1">
+          <span className="font-inter font-semibold text-[18px] leading-[26px] text-[#231F20]">
+            {data.className}
+          </span>
+          <h3 className="font-barlow font-semibold text-[28px] leading-[34px] text-[#066EB6]">
             {data.capacity}
-          </h5>
-          <p className="text-xs text-neutral-500">{data.power}</p>
+          </h3>
+          <span className="font-inter font-medium text-[12px] leading-[20px] text-[#77787B]">
+            {data.power}
+          </span>
         </div>
 
-        <span className="bg-primary-500 text-white text-xs px-3 py-1 rounded-sm whitespace-nowrap self-center">
-          {data.category}
-        </span>
+        {/* Right Side: Badge */}
+        <div className="flex items-center justify-center px-2 py-2 bg-[#066EB6] rounded-[4px]">
+          <span className="font-barlow font-medium text-[12px] leading-[14px] text-center text-white">
+            {data.category}
+          </span>
+        </div>
       </div>
 
       {/* IMAGE */}
-      <div className="relative h-[280px] sm:h-[320px] lg:h-[402px] w-full">
-        <Image
-          src={data.image}
-          alt={data.className}
-          fill
-          className="object-contain"
-        />
+      <div className="relative w-full h-[402px] mb-4">
+        {/* Using mix-blend-mode: darken as per Figma */}
+        <div className="relative w-full h-full mix-blend-darken">
+          <Image
+            src={data.image}
+            alt={data.className}
+            fill
+            className="object-contain"
+          />
+        </div>
       </div>
 
-      {/* FEATURES */}
-      <ul className="">
-        {data.features.map((feature, idx) => (
-          <li key={idx} className="flex items-start text-sm text-neutral-500">
-            <span className="text-secondary-500">•</span>
-            {feature}
-          </li>
-        ))}
-      </ul>
+      {/* CONTENT GROUP */}
+      <div className="flex flex-col gap-3 mb-6">
+        {/* Features as list items / text lines */}
+        <div className="flex flex-col gap-1">
+          {data.features.map((feat, i) => (
+            <div key={i} className="flex flex-row items-start gap-2">
+              <span className="text-[#77787B] text-[14px] leading-[22px]">•</span>
+              <p className="font-barlow font-normal text-[14px] leading-[22px] text-[#77787B]">
+                {feat}
+              </p>
+            </div>
+          ))}
+        </div>
+        {/* Description Paragraph */}
+        <p className="font-barlow font-normal text-[14px] leading-[22px] text-[#77787B]">
+          {data.description}
+        </p>
+      </div>
 
-      {/* DESCRIPTION */}
-      <p className="text-sm text-neutral-500">{data.description}</p>
-
-      {/* CTA */}
-      <button className=" self-start inline-flex items-center mt-3 px-6 h-11 rounded-full bg-secondary-500 text-white text-sm font-semibold hover:bg-secondary-600 transition">
-        Learn more
-        <Image src="/Vector.svg" alt="arrow" width={14} height={16} className="ml-2" />
-      </button>
+      {/* BUTTON */}
+      <div className="mt-auto">
+        <button className="flex flex-row justify-center items-center px-6 py-3 gap-1 w-[193px] h-[44px] bg-[#6BC06A] rounded-full hover:bg-[#5ab059] transition-colors">
+          <span className="font-barlow font-semibold text-[16px] leading-[19px] text-white">
+            Learn more
+          </span>
+          <div className="relative w-5 h-5 flex items-center justify-center">
+            {/* Arrow icon would go here. Using a simple text arrow or SVG if available. 
+                     Figma shows 'arrow-right' 20x20. */}
+            <Image src="/Vector.svg" alt="" width={20} height={20} />
+          </div>
+        </button>
+      </div>
     </div>
   );
 };
@@ -74,108 +99,96 @@ const ProductRange: React.FC = () => {
     {
       className: "T-Class",
       capacity: "40 to 500 tons",
-      power: "(140–1,760 kW)",
-      category: "Air-cooled oil-free chillers",
+      power: "(140-2,1760 kW)",
+      category: "Air-cooled oil-free chiller",
       image: "/chiller1.png",
       features: [
-        "Highest operating efficiency",
-        "Smallest footprint",
-        "70% quieter operation",
+        "Highest operating efficiency.",
+        "Smallest footprint.",
+        "70% quieter operation.",
       ],
       description:
-        "The Smardt air-cooled range offers the smallest footprint, the quietest operation, and the highest air-cooled operating efficiencies in the market.",
+        "The Smardt air-cooled range offers the smallest footprint, the quietest operation, and the highest air-cooled operating efficiencies in the market. Standard Smardt air-cooled chillers are over 70% lower in sound power than a standard screw machine.",
     },
     {
-      className: "Y-Class",
-      capacity: "500 to 1000 tons",
-      power: "(1,760–3,520 kW)",
-      category: "Water-cooled oil-free chillers",
+      className: "V-Class",
+      capacity: "350 to 3600 tons",
+      power: "(1,231 kW-12,66 MW)",
+      category: "Water-cooled oil-free chiller",
       image: "/chiller2.png",
       features: [
-        "Advanced heat exchanger design",
-        "Energy-efficient operation",
-        "Smart control system",
+        "Our largest water-cooled oil-free chiller range",
+        "Low kW/TR at low temperatures.",
+        "Inbuilt redundancy with multiple compressor design",
       ],
       description:
-        "Smardt’s V-Class range brings new levels of efficiency and reliability to the large water-cooled chiller market.",
+        "Smardt’s V-Class range brings new levels of efficiency, reliability and turn-down to the large water-cooled chiller market – now up to 3600 TR (12.6MW).",
     },
     {
-      className: "G-Class",
-      capacity: "1000 to 2000 tons",
-      power: "(3,520–7,040 kW)",
-      category: "Industrial oil-free chillers",
+      className: "T-Class",
+      capacity: "45 to 1600 tons",
+      power: "(211-4,200 kW)",
+      category: "Water-cooled oil-free chiller",
       image: "/chiller3.png",
       features: [
-        "Robust construction",
-        "High reliability",
-        "Remote monitoring capability",
+        "Highest operating efficiency",
+        "Smallest footprint.",
+        "Inbuilt redundancy.",
       ],
       description:
-        "Smardt’s T-Class water-cooled chillers offer class-leading performance in multiple configurations.",
+        "Smardt’s T-Class water-cooled chillers offer class leading performance and are available in a variety of different configurations to suite you project",
     },
     {
-      className: "C-Class",
-      capacity: "100 to 300 tons",
-      power: "(352–1,056 kW)",
-      category: "Compact oil-free chillers",
+      className: "E-Class",
+      capacity: "45 to 530 tons",
+      power: "(160-1,860 kW)",
+      category: "Evaporatively cooled oil-free chiller",
       image: "/chiller4.png",
       features: [
-        "Flexible installation options",
-        "Eco-friendly refrigerant",
-        "Compact footprint",
+        "More efficient than air-cooled chillers",
+        "High efficiency even in warm, dry climates",
+        "No cooling towers or risk of Legionella",
       ],
       description:
-        "The E-Class chiller is Smardt’s adiabatic cooling system designed for compact installations.",
+        "The E-Class chiller is Smardt’s adiabatic cooling system. Cross-fluted evaporative pads are situated on the outside of the coils. Separated from the coil surface, these pads are designed to be saturated with treated water, and the pads also provide protection for the coils.",
     },
   ];
 
   return (
-    <section className="w-full bg-white py-16">
-      <InnerContent>
+    <section className="w-full bg-white py-16 relative">
+      {/* Main Container tailored to content dimensions */}
+      <div className="w-full max-w-[1280px] mx-auto px-4 lg:px-0 relative">
         {/* HEADER */}
-        <div className="flex flex-col sm:flex-row items-start justify-between gap-6 mb-14">
-          <div className="max-w-[887px] flex flex-col gap-2">
-            <h2 className="text-2xl sm:text-3xl lg:text-[48px] font-barlow font-semibold leading-tight text-primary-500">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-16 relative">
+          <div className="flex flex-col gap-6 max-w-[887px]">
+            <h2 className="font-barlow font-semibold text-[48px] leading-[58px] text-[#066EB6]">
               The Broadest Range of High-Performance Oil-Free Chillers
             </h2>
-            <p className="text-sm sm:text-base lg:text-lg font-medium font-inter text-neutral-950 leading-relaxed">
+            <p className="font-inter font-medium text-[18px] leading-[26px] text-[#231F20]">
               From pioneering oil-free chillers to comprehensive building systems-engineered for performance, reliability and lifecycle value.
             </p>
           </div>
 
           <a
             href="#"
-            className="flex items-center gap-1 text-base sm:text-lg font-medium font-inter text-secondary-500 hover:text-secondary-600 transition-colors whitespace-nowrap"
+            className="flex items-center gap-0 lg:absolute lg:right-0 lg:top-[19px]"
           >
-            <span>View all</span>
-            <Image
-              src="/arrowfill-right.svg"
-              alt="arrow"
-              width={16}
-              height={16}
-            />
+            <span style={{ fontFamily: 'var(--font-inter)' }} className="font-inter font-medium text-[18px] leading-[26px] tracking-[0px] text-[#6BC06A] whitespace-nowrap antialiased">View all</span>
+            <div className="relative w-5 h-5">
+              <Image src="/arrowfill-right.svg" alt="->" width={20} height={20} />
+            </div>
           </a>
         </div>
 
-        {/* CARDS */}
-        <div className="flex flex-col gap-y-12">
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 border-b border-neutral-200">
-            {chillers.slice(0, 2).map((chiller) => (
-              <ChillerCard key={chiller.className} data={chiller} />
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6">
-            {chillers.slice(2).map((chiller) => (
-              <ChillerCard key={chiller.className} data={chiller} />
-            ))}
-          </div>
-
+        {/* PRODUCT GRID */}
+        {/* Grid layout: 2 columns on large screens. */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-[114px] gap-y-20">
+          {chillers.map((chiller, index) => (
+            <ChillerCard key={index} data={chiller} />
+          ))}
         </div>
 
-
-      </InnerContent>
+      </div>
     </section>
   );
 };

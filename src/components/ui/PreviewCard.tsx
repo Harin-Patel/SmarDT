@@ -48,13 +48,8 @@ export default function PreviewCard({ data, onNext }: any) {
               <ul className="mt-4 space-y-3">
                 {data.bullets.map((item: any, i: number) => (
                   <li key={i} className="flex gap-2 items-start">
-                    <div className="flex-shrink-0 mt-1">
-                      <Image
-                        src={item.icon }
-                        alt=""
-                        width={20}
-                        height={20}
-                      />
+                    <div className="flex-shrink-0 mt-1 w-5 h-5 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
+                      {item.icon}
                     </div>
                     <div>
                       <p className="text-xs md:text-sm font-semibold">
@@ -69,7 +64,7 @@ export default function PreviewCard({ data, onNext }: any) {
               </ul>
             </div>
 
-            
+
           </div>
         </div>
       </div>

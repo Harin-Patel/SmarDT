@@ -17,9 +17,9 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
   href,
 }) => {
   return (
-    <div className="flex flex-col w-[411px] h-[336px] gap-4">
+    <div className="relative w-full max-w-[411px] h-full min-h-[336px] flex flex-col items-start gap-4">
       {/* IMAGE */}
-      <div className="relative w-[411px] h-[200px] overflow-hidden rounded-[14px] flex-shrink-0">
+      <div className="relative w-full h-[200px] overflow-hidden rounded-[14px] flex-shrink-0">
         <Image
           src={image}
           alt={title}
@@ -28,30 +28,31 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
         />
       </div>
 
-      {/* TEXT CONTENT */}
-      <div className="flex-1 flex flex-col gap-2">
+      {/* TEXT CONTENT FRAME */}
+      <div className="flex flex-col items-start w-full max-w-[363px] gap-2 flex-1">
         {/* TITLE */}
-        <h3 className="text-lg font-barlow font-semibold leading-tight text-neutral-950">
+        <h3 className="w-full min-h-[22px] font-barlow font-semibold text-[18px] leading-[22px] text-[#231F20]">
           {title}
         </h3>
 
-        {/* DESCRIPTION */}
-        <p className="text-sm font-barlow font-medium leading-snug text-neutral-500">
-          {description}
-        </p>
-      </div>
+        {/* DESCRIPTION & BUTTON WRAPPER */}
+        <div className="flex flex-col items-start w-full gap-3 flex-1">
+          {/* DESCRIPTION */}
+          <p className="w-full font-barlow font-medium text-[14px] leading-[17px] text-[#77787B] line-clamp-2">
+            {description}
+          </p>
 
-      {/* BUTTON */}
-      <button className="mt-auto inline-flex items-center justify-center h-[44px] w-[153px] rounded-[100px] bg-secondary-500 text-white text-base font-semibold hover:bg-secondary-600 transition">
-        Learn more
-        <Image
-          src="/Vector.svg"
-          alt="arrow"
-          width={14}
-          height={16}
-          className="ml-2"
-        />
-      </button>
+          {/* BUTTON */}
+          <button className="mt-auto flex flex-row justify-center items-center px-6 py-3 gap-1 w-[153px] h-[44px] bg-[#6BC06A] rounded-[100px] hover:bg-[#5ab059] transition-colors">
+            <span className="font-barlow font-semibold text-[16px] leading-[19px] text-white">
+              Learn more
+            </span>
+            <div className="relative w-[20px] h-[20px] flex items-center justify-center">
+              <Image src="/Vector.svg" alt="" width={20} height={20} />
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

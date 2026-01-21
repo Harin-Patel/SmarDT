@@ -31,18 +31,17 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ className = "", slides: propSli
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className={`relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-screen overflow-hidden ${className}`}>
+    <section className={`relative w-full max-w-[1440px] mx-auto mt-[72px] lg:mt-[108px] h-[634px] overflow-hidden ${className}`}>
       {/* Background Slider */}
       <div className="absolute inset-0 w-full h-full -z-10">
-        {slides.map((slide, index) => (
+        {[{ image: "/hero-factory.jpg", alt: "Factory Interface" }].map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
           >
             <Image src={slide.image} alt={slide.alt} fill className="object-cover" priority={index === 0} />
-            <div className="absolute inset-0 bg-primary-500/60" />
+            <div className="absolute inset-0 bg-[#066EB67A]" />
           </div>
         ))}
       </div>
@@ -56,27 +55,36 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ className = "", slides: propSli
           <button
             onClick={prevSlide}
             aria-label="Previous slide"
-            className="w-[51px] h-[51px] rounded-full bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.25)] flex items-center justify-center transition-all duration-200 hover:bg-white/20 hover:scale-105"
+            className="w-[51px] h-[51px] rounded-full bg-[#FFFFFF33] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.25)] flex items-center justify-center transition-all duration-200 hover:bg-white/20 hover:scale-105"
+            style={{ boxShadow: "inset 1px 1px 0 0 rgba(255,255,255,0.5), inset -1px -1px 0 0 rgba(255,255,255,0.5)" }}
           >
             <Image src="/vectorleft.svg" alt="Previous" width={20} height={20} className="pointer-events-none" />
           </button>
 
           {/* Content */}
-          <div className="flex flex-col items-center justify-center text-center w-[777px] h-[306px]">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-semibold font-barlow text-white mb-2 sm:mb-3 lg:mb-4 leading-[1.2] tracking-normal">
-              {heroContent.heading}
-            </h2>
-            <h6 className="text-2xl font-semibold text-primary-150 leading-none tracking-normal mb-4 sm:mb-8 lg:mb-10">
-              {heroContent.tagline}
-            </h6>
-            <Button>{heroContent.buttonText}</Button>
+          {/* Desktop Content Group */}
+          <div className="flex flex-col items-center text-center w-full max-w-[777px] lg:gap-[40px]">
+            {/* Heading and Tagline Group */}
+            <div className="flex flex-col items-center lg:gap-[16px]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[60px] lg:leading-[72px] font-semibold font-barlow text-white tracking-normal">
+                {heroContent.heading}
+              </h2>
+              <h6 className="text-xl lg:text-[24px] lg:leading-[29px] font-semibold font-barlow text-[#DBEAFE] tracking-normal max-w-[736px]">
+                {heroContent.tagline}
+              </h6>
+            </div>
+            {/* Button */}
+            <Button className="w-auto lg:w-[225px] h-auto lg:h-[48px] !bg-[#6BC06A] !rounded-full !text-white !font-barlow !font-semibold text-lg lg:text-[16px] lg:leading-[19px] px-8 lg:px-0 flex items-center justify-center">
+              {heroContent.buttonText}
+            </Button>
           </div>
 
           {/* Right Arrow */}
           <button
             onClick={nextSlide}
             aria-label="Next slide"
-            className="w-[51px] h-[51px] rounded-full bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.25)] flex items-center justify-center transition-all duration-200 hover:bg-white/20 hover:scale-105"
+            className="w-[51px] h-[51px] rounded-full bg-[#FFFFFF33] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.25)] flex items-center justify-center transition-all duration-200 hover:bg-white/20 hover:scale-105"
+            style={{ boxShadow: "inset 1px 1px 0 0 rgba(255,255,255,0.5), inset -1px -1px 0 0 rgba(255,255,255,0.5)" }}
           >
             <Image src="/vectorleft.svg" alt="Next" width={20} height={20} className="rotate-180 pointer-events-none" />
           </button>
@@ -84,20 +92,21 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ className = "", slides: propSli
 
         {/* Mobile / Tablet Content */}
         <div className="lg:hidden flex flex-col items-center justify-center text-center w-[90%] max-w-md mt-8">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold font-barlow text-white mb-2 sm:mb-3 leading-[1.2] tracking-normal">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold font-barlow text-white mb-4 sm:mb-5 leading-[1.2] tracking-normal">
             {heroContent.heading}
           </h2>
-          <h6 className="text-sm sm:text-base md:text-lg font-semibold text-primary-150 leading-none tracking-normal mb-4 sm:mb-6">
+          <h6 className="text-lg sm:text-xl md:text-2xl font-semibold text-primary-150 leading-tight tracking-normal mb-6 sm:mb-8">
             {heroContent.tagline}
           </h6>
-          <Button>{heroContent.buttonText}</Button>
+          <Button className="text-lg px-8 py-3 h-auto">{heroContent.buttonText}</Button>
 
           {/* Mobile Arrows Below Content */}
           <div className="flex mt-6 gap-6">
             <button
               onClick={prevSlide}
               aria-label="Previous slide"
-              className="w-[51px] h-[51px] rounded-full bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.25)] flex items-center justify-center transition-all duration-200 hover:bg-white/20 hover:scale-105"
+              className="w-[51px] h-[51px] rounded-full bg-[#FFFFFF33] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.25)] flex items-center justify-center transition-all duration-200 hover:bg-white/20 hover:scale-105"
+              style={{ boxShadow: "inset 1px 1px 0 0 rgba(255,255,255,0.5), inset -1px -1px 0 0 rgba(255,255,255,0.5)" }}
             >
               <Image src="/vectorleft.svg" alt="Previous" width={20} height={20} className="pointer-events-none" />
             </button>
@@ -105,7 +114,8 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ className = "", slides: propSli
             <button
               onClick={nextSlide}
               aria-label="Next slide"
-              className="w-[51px] h-[51px] rounded-full bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.25)] flex items-center justify-center transition-all duration-200 hover:bg-white/20 hover:scale-105"
+              className="w-[51px] h-[51px] rounded-full bg-[#FFFFFF33] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.25)] flex items-center justify-center transition-all duration-200 hover:bg-white/20 hover:scale-105"
+              style={{ boxShadow: "inset 1px 1px 0 0 rgba(255,255,255,0.5), inset -1px -1px 0 0 rgba(255,255,255,0.5)" }}
             >
               <Image src="/vectorleft.svg" alt="Next" width={20} height={20} className="rotate-180 pointer-events-none" />
             </button>
